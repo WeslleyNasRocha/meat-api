@@ -1,20 +1,26 @@
 {
   "name": "meat-api",
   "version": "1.0.0",
-  "description": "API de Restaurantes",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": {
+    "email": "weslleytato.12@gmail.com",
+    "name": "Weslley Rocha"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "dev": "concurrently \"tsc -w\" \"nodemon dist\\main.js\" "
+  },
+  "license": "MIT",
   "dependencies": {
-    "mongoose": "^5.0.17",
-    "restify": "6.3.4"
+    "restify": "^7.1.1"
   },
   "devDependencies": {
-    "@types/node": "^10.0.6",
-    "@types/restify": "5.0.6"
+    "@types/mongoose": "4.7.32",
+    "@types/restify": "5.0.6",
+    "concurrently": "^3.5.1",
+    "nodemon": "^1.17.3",
+    "typescript": "^2.8.3"
+  },
+  "peerDependencies": {
+    "mongoose": "4.13.9"
   }
 }
