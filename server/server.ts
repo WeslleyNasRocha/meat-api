@@ -1,10 +1,14 @@
 import * as restify from 'restify';
+import * as mongoose from 'mongoose';
 import { env } from '../common/enviroment';
 import { Router } from '../common/router';
 
+import { mergePatchBodyParser } from './merge-patch.parser';
+
 export class Server {
-  initDB(): any {
-    throw new Error('Method not implemented.');
+  initDB(): mongoose.MongooseThenable {
+    (<any>mongoose).Promise = global.Promise;
+    return mongoose.connect(env.db.url, { useMongoClient: true });
   }
   application: restify.Server;
 
@@ -17,6 +21,8 @@ export class Server {
         });
 
         this.application.use(restify.plugins.queryParser());
+        this.application.use(restify.plugins.bodyParser());
+        this.application.use(mergePatchBodyParser);
 
         // routes
         routers.forEach(router => {
