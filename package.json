@@ -1,14 +1,13 @@
 {
   "name": "meat-api",
   "version": "1.0.0",
-  "main": "index.js",
   "author": {
     "email": "weslleytato.12@gmail.com",
     "name": "Weslley Rocha"
   },
   "scripts": {
-    "start": "node main.js",
-    "dev": "concurrently \"tsc -w\" \"nodemon dist\\main.js\" "
+    "start": "node app/main.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon app/main.js\" "
   },
   "license": "MIT",
   "dependencies": {
