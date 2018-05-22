@@ -7,6 +7,7 @@
     "name": "Weslley Rocha"
   },
   "scripts": {
+    "start": "node dist\\main.js",
     "dev": "concurrently \"tsc -w\" \"nodemon dist\\main.js\" "
   },
   "license": "MIT",
@@ -23,5 +24,8 @@
     "concurrently": "^3.5.1",
     "nodemon": "^1.17.3",
     "typescript": "^2.8.3"
+  },
+  "engines": {
+    "node": "10.0.0"
   }
 }
