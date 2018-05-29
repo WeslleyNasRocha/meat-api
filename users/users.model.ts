@@ -1,4 +1,7 @@
 import { Schema, model, Document } from 'mongoose';
+import * as bcrypt from 'bcryptjs';
+import { validateCPF } from '../common/validators';
+import { env } from '../common/enviroment';
 
 export interface User extends Document {
   name: String;
@@ -27,11 +30,30 @@ const userSchema = new Schema({
   gender: {
     type: String,
     required: false,
-    enum: ['Masculino', 'Feminino', 'Não Binario', 'Outro']
+    enum: ['Masculino', 'Feminino', 'Outro']
   },
-  cpf:{
+  cpf: {
     type: String,
-    required: false
+    required: false,
+    validate: {
+      validator: validateCPF,
+      message: '{PATH}: Invalid cpf ({VALUE})'
+    }
+  }
+});
+
+userSchema.pre('save', function(next) {
+  const user = this as User;
+  if (!user.isModified('password')) {
+    next();
+  } else {
+    bcrypt
+      .hash(user.password.toString(), env.security.saltRounds)
+      .then(hash => {
+        user.password = hash;
+        next();
+      })
+      .catch(err => next(err));
   }
 });
 

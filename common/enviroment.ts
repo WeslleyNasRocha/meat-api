@@ -6,5 +6,8 @@ export const env = {
     url:
       process.env.DB_URL ||
       'mongodb://admin:admin@ds117590.mlab.com:17590/meat-api'
+  },
+  security: {
+    saltRounds: process.env.SALT_ROUNDS || 10
   }
 };

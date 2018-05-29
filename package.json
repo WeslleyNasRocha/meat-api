@@ -7,15 +7,18 @@
   },
   "scripts": {
     "start": "node app/main.js",
-    "dev": "concurrently \"tsc -w\" \"nodemon app/main.js\" "
+    "dev": "concurrently \"tsc -w\" \"nodemon app/main.js\" ",
+    "debug": "concurrently \"tsc -w\" \"nodemon --inspect-brk app/main.js\" "
   },
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "mongoose": "4.13.9",
     "restify": "^7.1.1",
     "restify-errors": "^6.0.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.1",
     "@types/mongoose": "4.7.32",
     "@types/node": "^10.0.9",
     "@types/restify": "5.0.6",
