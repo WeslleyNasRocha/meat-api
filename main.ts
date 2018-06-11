@@ -1,7 +1,6 @@
 import { Server } from './server/server';
+import { usersRouter, locationRouter } from './routes';
 
-import { usersRouter } from './users/users.router';
-import { locationRouter } from './location/location.router';
 const server = new Server();
 server
   .bootstrap([usersRouter, locationRouter])

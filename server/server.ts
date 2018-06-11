@@ -7,7 +7,7 @@ import { handleError } from './error.handler';
 import { mergePatchBodyParser } from './merge-patch.parser';
 
 export class Server {
-  initDB(): mongoose.MongooseThenable {
+  private initDB() {
     (<any>mongoose).Promise = global.Promise;
     return mongoose.connect(env.db.url, { useMongoClient: true });
   }

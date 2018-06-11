@@ -1,6 +1,6 @@
 import * as restify from 'restify';
 import { Router } from '../common/router';
-import { Location } from './location.model';
+import { Location } from '../models/location.model';
 
 class LocationRouter extends Router {
   applyRoutes(application: restify.Server) {

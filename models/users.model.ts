@@ -1,4 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
+import { validateCPF } from "../common/validators";
 
 export interface User extends Document {
   name: String;
@@ -31,7 +32,11 @@ const userSchema = new Schema({
   },
   cpf:{
     type: String,
-    required: false
+    required: false,
+    validate:{
+      validator: validateCPF,
+      message: '{PATH}: Invalid CPF ({VALUE})'
+    }
   }
 });
 
