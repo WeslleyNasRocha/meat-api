@@ -1,8 +1,9 @@
-import { Schema, model, Document } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 
+// tslint:disable-next-line:interface-name
 export interface Location extends Document {
-  latitude: String;
-  longitude: String;
+  latitude: string;
+  longitude: string;
 }
 
 const locationSchema = new Schema({

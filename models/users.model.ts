@@ -1,12 +1,12 @@
-import { Schema, model, Document } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-import { validateCPF } from '../common/validators';
+import { Document, model, Schema } from 'mongoose';
 import { env } from '../common/enviroment';
+import { validateCPF } from '../common/validators';
 
 export interface User extends Document {
-  name: String;
-  email: String;
-  password: String;
+  name: string;
+  email: string;
+  password: string;
 }
 
 const userSchema = new Schema({
@@ -18,6 +18,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     required: true,
+    // tslint:disable-next-line:max-line-length
     match: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   },
   password: {

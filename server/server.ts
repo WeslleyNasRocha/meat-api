@@ -1,5 +1,5 @@
-import * as restify from 'restify';
 import * as mongoose from 'mongoose';
+import * as restify from 'restify';
 import { env } from '../common/enviroment';
 import { Router } from '../common/router';
 import { handleError } from './error.handler';
@@ -7,13 +7,21 @@ import { handleError } from './error.handler';
 import { mergePatchBodyParser } from './merge-patch.parser';
 
 export class Server {
-  private initDB() {
-    (<any>mongoose).Promise = global.Promise;
-    return mongoose.connect(env.db.url, { useMongoClient: true });
-  }
-  application: restify.Server;
+  public application: restify.Server;
 
-  initRoutes(routers: Router[]): Promise<any> {
+  public bootstrap(routers: Router[] = []): Promise<Server> {
+    return this.initDB().then(() => this.initRoutes(routers).then(() => this));
+  }
+
+  private initDB() {
+    (mongoose as any).Promise = global.Promise;
+    return mongoose.connect(
+      env.db.url,
+      { useMongoClient: true }
+    );
+  }
+
+  private initRoutes(routers: Router[]): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.application = restify.createServer({
@@ -39,9 +47,5 @@ export class Server {
         reject(error);
       }
     });
-  }
-
-  bootstrap(routers: Router[] = []): Promise<Server> {
-    return this.initDB().then(() => this.initRoutes(routers).then(() => this));
   }
 }

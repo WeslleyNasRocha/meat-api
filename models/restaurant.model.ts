@@ -1,4 +1,4 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 import * as mongoose from 'mongoose';
 
 export interface MenuItem extends Document {

@@ -10,7 +10,7 @@ export const mergePatchBodyParser = (
 ) => {
   if (req.getContentType() === mpContentType && req.method === 'PATCH') {
     try {
-      (<any>req).rawBody = req.body;
+      (req as any).rawBody = req.body;
       req.body = JSON.parse(req.body);
     } catch (error) {
       return next(new BadRequestError(`Invalid content: ${error.message}`));

@@ -3,9 +3,9 @@ import { Router } from '../common/router';
 import { Location } from '../models/location.model';
 
 class LocationRouter extends Router {
-  applyRoutes(application: restify.Server) {
+  public applyRoutes(application: restify.Server) {
     application.post('/location', (req, res, next) => {
-      let location = new Location(req.body);
+      const location = new Location(req.body);
       location
         .save()
         .then(this.render(res, next))
