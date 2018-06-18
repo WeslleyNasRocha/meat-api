@@ -1,4 +1,4 @@
-import { Document, Model } from 'mongoose';
+import { Document, Model, Types } from 'mongoose';
 import { NotFoundError } from 'restify-errors';
 import { Router } from './router';
 
@@ -7,10 +7,18 @@ export abstract class ModelRouter<D extends Document> extends Router {
     super();
   }
 
+  validateId = (req, res, next) => {
+    if (!Types.ObjectId.isValid(req.params.id)) {
+      next(new NotFoundError('Document not found'));
+    } else {
+      next();
+    }
+  };
+
   protected findAll = (req, res, next) => {
     this.model
       .find()
-      .then(this.render(res, next))
+      .then(this.renderAll(res, next))
       .catch(next);
   };
 
